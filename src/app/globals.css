@@ -120,3 +120,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+html {
+  font-family: var(--font-poppins);
+}
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+::selection {
+  background-color: #0141f0;
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
