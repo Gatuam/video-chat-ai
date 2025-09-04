@@ -5,6 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { TbBrandGithub } from "react-icons/tb";
+
 import {
   Form,
   FormControl,
@@ -20,6 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 const SignupView = () => {
   const router = useRouter();
@@ -55,9 +59,11 @@ const SignupView = () => {
           name: data.name,
           email: data.email,
           password: data.password,
+          callbackURL: "/",
         },
         {
           onSuccess: () => {
+            toast.success("Sign up succefully");
             router.push("/");
           },
           onError: ({ error }) => {
@@ -184,11 +190,27 @@ const SignupView = () => {
                     Or continue with
                   </p>
                   <div className=" grid grid-cols-2 gap-4">
-                    <Button type="button" variant={"outline"}>
-                      Google
+                    <Button
+                      onClick={() => {
+                        authClient.signIn.social({
+                          provider: "google",
+                        });
+                      }}
+                      type="button"
+                      variant={"outline"}
+                    >
+                      <FcGoogle />
                     </Button>
-                    <Button type="button" variant={"outline"}>
-                      Github
+                    <Button
+                      onClick={() => {
+                        authClient.signIn.social({
+                          provider: "github",
+                        });
+                      }}
+                      type="button"
+                      variant={"outline"}
+                    >
+                      <TbBrandGithub />
                     </Button>
                   </div>
                 </div>
