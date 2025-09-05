@@ -11,6 +11,7 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ChevronUp, CreditCard, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export const DashboardUserButton = () => {
   const router = useRouter();
@@ -32,7 +33,12 @@ export const DashboardUserButton = () => {
       <DropdownMenuTrigger className=" rounded-lg border border-accent-foreground/20 p-3 py-4 w-full flex items-center justify-start bg-accent/50 overflow-hidden gap-3">
         {data?.user?.image ? (
           <Avatar>
-            <AvatarImage src={data?.user?.image}></AvatarImage>
+            <Image 
+            alt="avatar" 
+            src={data?.user?.image} 
+            width={30}
+            height={30}
+            />
           </Avatar>
         ) : (
           <Avatar>
@@ -52,17 +58,17 @@ export const DashboardUserButton = () => {
       <DropdownMenuContent
         align="end"
         side="top"
-        className=" max-w-55 min-w-67 md:min-w-60"
+        className=" max-w-55 min-w-67 md:min-w-60 flex flex-col gap-1"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className=" cursor-pointer flex items-center justify-between">
+        <DropdownMenuItem className=" cursor-pointer flex items-center justify-between bg-accent/50">
           Billing
           <CreditCard className=" cursor-pointer size-4" />
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={OnLogout}
-          className=" flex items-center justify-between"
+          className=" cursor-pointer flex items-center justify-between bg-accent/50"
         >
           Logout
           <LogOut className=" size-4" />

@@ -15,5 +15,5 @@ export const AgentView = () => {
     return <ErrorState title="Failed to load Agents" description="Something went wrong!"/>;
   }
 
-  return <div>{JSON.stringify(data, null, 2)}</div>;
+  return <div>wtf</div>;
 };
