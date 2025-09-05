@@ -14,16 +14,16 @@ import { DashboardCammand } from "./DashboardCammand";
 export const DashboardNav = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { state, toggleSidebar, isMobile } = useSidebar();
- useEffect(()=> {
-    const down = (e : KeyboardEvent)=> {
-        if(e.key === 'k' && (e.metaKey || e.ctrlKey)){
-            e.preventDefault();
-            setOpen((pre)=> !pre)
-        }
-    }
-    document.addEventListener('keydown', down);
-    return ()=> document.removeEventListener('keydown', down)
- }, [])
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((pre) => !pre);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
   return (
     <>
       <DashboardCammand open={open} setOpen={setOpen} />

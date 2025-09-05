@@ -92,7 +92,7 @@ export const DashboardSidebar = () => {
       </SidebarContent>
 
       <SidebarFooter className=" text-accent-foreground">
-        <DashboardUserButton/>
+        <DashboardUserButton />
       </SidebarFooter>
     </Sidebar>
   );

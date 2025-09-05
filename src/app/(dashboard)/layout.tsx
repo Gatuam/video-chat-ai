@@ -7,12 +7,12 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <SidebarProvider>
-        <DashboardSidebar/>
+        <DashboardSidebar />
         <main className=" flex flex-col h-screen w-screen">
-            <DashboardNav/>
-            {children}</main>
+          <DashboardNav />
+          {children}
+        </main>
       </SidebarProvider>
-      
     </>
   );
 };
