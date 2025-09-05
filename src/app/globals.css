@@ -130,8 +130,8 @@ body {
 }
 
 ::selection {
-  background-color: #0141f0;
-  color: white;
+  background-color: #0606ee;
+  color: rgb(232, 238, 252);
 }
 
 button {
