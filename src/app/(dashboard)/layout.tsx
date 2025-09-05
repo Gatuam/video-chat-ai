@@ -1,4 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { DashboardNav } from "@/modules/dashboard/ui/components/DashboardNav";
 import { DashboardSidebar } from "@/modules/dashboard/ui/components/DashboardSidebar";
 import React from "react";
 
@@ -7,7 +8,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <SidebarProvider>
         <DashboardSidebar/>
-        <main className=" flex flex-col h-screen w-screen">{children}</main>
+        <main className=" flex flex-col h-screen w-screen">
+            <DashboardNav/>
+            {children}</main>
       </SidebarProvider>
       
     </>

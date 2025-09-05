@@ -52,7 +52,7 @@ export const DashboardUserButton = () => {
       <DropdownMenuContent
         align="end"
         side="top"
-        className=" max-w-55 min-w-60"
+        className=" max-w-55 min-w-67 md:min-w-60"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />

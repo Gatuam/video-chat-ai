@@ -22,7 +22,7 @@ export const DashboardSidebar = () => {
   const pathname = usePathname();
   return (
     <Sidebar>
-      <SidebarHeader className=" text-sidebar-accent-foreground flex justify-center items-center">
+      <SidebarHeader className=" text-sidebar-accent-foreground flex justify-center items-center ">
         <Link href={"/"} className=" flex items-center gap-2 pt-2">
           <Image src={"/logo.png"} height={30} width={30} alt="logo"></Image>
           <p className=" text-2xl font-semibold text-primary">Video-AI</p>
