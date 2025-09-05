@@ -3,6 +3,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandResponsiveDialog,
 } from "@/components/ui/command";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -13,11 +14,11 @@ interface Prpos {
 
 export const DashboardCammand = ({ open, setOpen }: Prpos) => {
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandResponsiveDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder=" Find video or agent" />
       <CommandList>
         <CommandItem>Test</CommandItem>
       </CommandList>
-    </CommandDialog>
+    </CommandResponsiveDialog>
   );
 };

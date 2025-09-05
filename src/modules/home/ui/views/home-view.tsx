@@ -1,17 +1,19 @@
 "use client";
 
+import ResponsiveDailog from "@/components/global/ResponsiveDailog";
+import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function HomeView() {
+  const [open, setOpen] =useState(true);
+ 
 
-  const router = useRouter();
-  const { data: session } = authClient.useSession();
-  if (session) {
     return (
       <div>
        hi
       </div>
     );
-  }
+
 }

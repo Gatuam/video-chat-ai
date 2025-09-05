@@ -7,7 +7,7 @@ export const agentsRouter = createTRPCRouter({
     getmany : baseProcedure
     .query(async(input)=> {
         const data = await db.select().from(agents);
-        // return data;
-        throw new TRPCError({code : "BAD_GATEWAY"})
+        return data;
+        //throw new TRPCError({code : "BAD_GATEWAY"})
     }),
 })

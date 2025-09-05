@@ -39,7 +39,7 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={i}>
                   <SidebarMenuButton
                     asChild
-                    className={` bg-sidebar-foreground/6 hover:bg-sidebar-accent-foreground/25 ${
+                    className={` bg-sidebar-foreground/6 hover:bg-sidebar-accent-foreground/25 border-t shadow-sm ${
                       pathname === item.herf &&
                       "bg-sidebar-accent-foreground/25"
                     }`}
@@ -69,7 +69,7 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={i}>
                   <SidebarMenuButton
                     asChild
-                    className={` bg-sidebar-foreground/6 hover:bg-sidebar-accent-foreground/25 ${
+                    className={` bg-sidebar-foreground/6 hover:bg-sidebar-accent-foreground/25 border-t shadow-sm  ${
                       pathname === item.herf &&
                       "bg-sidebar-accent-foreground/25"
                     }`}
