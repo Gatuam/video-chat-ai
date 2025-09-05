@@ -14,7 +14,7 @@ const Page = async () => {
   }
   return (
     <>
-      <SigninView />
+      <SigninView />   
     </>
   );
 };

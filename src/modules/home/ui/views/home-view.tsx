@@ -9,7 +9,7 @@ export default function HomeView() {
   const {data : session} = authClient.useSession();
   if(session){
     return (
-      <div className="w-full h-screen flex flex-col text-accent justify-center items-center bg-accent-foreground">
+      <div className="w-full h-screen flex flex-col text-accent justify-center items-center ">
         Login as {session?.user?.name}
         <Button
         variant={'secondary'}

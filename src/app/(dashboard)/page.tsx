@@ -13,6 +13,7 @@ const Page = async () => {
   }
   return (
     <>
+    
       <HomeView />
     </>
   );

@@ -64,7 +64,7 @@ const SigninView = () => {
   };
   return (
     <div className=" flex flex-col gap-6">
-      <Card className=" overflow-hidden p-0 shadow-2xl">
+      <Card className=" overflow-hidden p-0 shadow-2xl !bg-primary-foreground">
         <CardContent className=" grid p-0 md:grid-cols-2">
           <div className=" flex flex-col  space-y-8 px-9 py-11">
             <div className=" mb-9 flex flex-col justify-center items-center">
@@ -177,7 +177,7 @@ const SigninView = () => {
             </Form>
           </div>
 
-          <div className=" bg-radial from-blue-400 to-blue-500 relative hidden md:flex flex-col gap-y-3 items-center justify-center">
+          <div className=" bg-radial  from-accent to-accent/80 relative hidden md:flex flex-col gap-y-3 items-center justify-center">
             <img
               src={"/logo.png"}
               alt="logo"

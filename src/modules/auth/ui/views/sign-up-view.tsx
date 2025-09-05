@@ -228,7 +228,7 @@ const SignupView = () => {
             </Form>
           </div>
 
-          <div className=" bg-radial from-blue-400 to-blue-500 relative hidden md:flex flex-col gap-y-3 items-center justify-center">
+          <div className=" bg-radial from-accent to-accent/80 relative hidden md:flex flex-col gap-y-3 items-center justify-center">
             <img
               src={"/logo.png"}
               alt="logo"
