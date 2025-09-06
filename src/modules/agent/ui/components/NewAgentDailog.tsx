@@ -17,8 +17,8 @@ export const NewAgentDailog = ({ open, onOpenChange }: Props) => {
       onOpenChange={onOpenChange}
     >
       <AgentFrom
-      onSuccess={()=> onOpenChange(false)}
-      onCancle={()=> onOpenChange(false)}
+        onSuccess={() => onOpenChange(false)}
+        onCancle={() => onOpenChange(false)}
       />
     </ResponsiveDailog>
   );

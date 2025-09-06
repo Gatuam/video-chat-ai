@@ -33,11 +33,11 @@ export const DashboardUserButton = () => {
       <DropdownMenuTrigger className=" rounded-lg border border-accent-foreground/20 p-3 py-4 w-full flex items-center justify-start bg-accent/50 overflow-hidden gap-3">
         {data?.user?.image ? (
           <Avatar>
-            <Image 
-            alt="avatar" 
-            src={data?.user?.image} 
-            width={30}
-            height={30}
+            <Image
+              alt="avatar"
+              src={data?.user?.image}
+              width={30}
+              height={30}
             />
           </Avatar>
         ) : (

@@ -4,25 +4,22 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 import { DataTable } from "../components/DataTable";
 import { columns } from "../components/Colums";
+import { useFilterHook } from "../../hooks/useFilterHook";
+import { DataPagination } from "../components/DataPagination";
 
 export const AgentView = () => {
-  const dataTable: any = [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "success",
-      email: "m@example.com",
-    },
-    // ...
-  ];
+  const [filter, setFilter] = useFilterHook();
   const trpc = useTRPC();
-  const { data, isError } = useSuspenseQuery(trpc.agent.getmany.queryOptions());
-
-
+  const { data, isError } = useSuspenseQuery(trpc.agent.getmany.queryOptions({...filter}));
 
   return (
-    <div className=" flex-1 flex flex-col gap-y-4 md:px-11 px-8 py-6 w-full ">
-      <DataTable data={data} columns={columns} />
+    <div className=" flex-1 flex flex-col gap-y-3 md:px-6 px-4 py-3 w-full ">
+      <DataTable data={data.items} columns={columns} />
+      <DataPagination
+      pages={filter.page}
+      totalPages={data.totalPages}
+      onPageChange={(page)=> setFilter({page})}
+      />
     </div>
   );
 };

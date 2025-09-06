@@ -14,7 +14,9 @@ export const columns: ColumnDef<AgentGetOne>[] = [
       <div className=" flex flex-col gap-y-2">
         <div className=" flex items-center gap-x-2">
           <GenAvatarImage name={row.original.name} />
-          <span className=" text-sm font-semibold text-muted-foreground/90">{row.original.name}</span>
+          <span className=" text-sm font-semibold text-muted-foreground/90">
+            {row.original.name}
+          </span>
         </div>
       </div>
     ),
@@ -25,7 +27,9 @@ export const columns: ColumnDef<AgentGetOne>[] = [
     cell: ({ row }) => (
       <div className=" flex flex-col gap-y-2">
         <div className=" flex items-center gap-x-2">
-          <p className=" text-sm font-thin text-muted-foreground/40 truncate">{row.original.instructions}</p>
+          <p className=" text-sm font-thin text-muted-foreground/40 truncate">
+            {row.original.instructions}
+          </p>
         </div>
       </div>
     ),
@@ -37,11 +41,13 @@ export const columns: ColumnDef<AgentGetOne>[] = [
       <div className=" flex flex-col gap-y-2">
         <div className=" flex items-center gap-x-2">
           <Badge
-          variant="secondary"
-          className="bg-blue-500 text-white dark:bg-blue-600 animate-pulse"
+            variant="secondary"
+            className="bg-blue-500 text-white dark:bg-blue-600 animate-pulse"
           >
-            <VideoIcon/>
-            <p className=" text-sm font-thin truncate line-clamp-1">1mettings</p>
+            <VideoIcon />
+            <p className=" text-sm font-thin truncate line-clamp-1">
+              1mettings
+            </p>
           </Badge>
         </div>
       </div>

@@ -36,7 +36,7 @@ export const AgentFrom = ({ onSuccess, onCancle, initialVale }: Props) => {
   const createAgent = useMutation(
     trpc.agent.create.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.agent.getmany.queryOptions());
+        await queryClient.invalidateQueries(trpc.agent.getmany.queryOptions({}));
         if (initialVale?.id) {
           await queryClient.invalidateQueries(
             trpc.agent.getOne.queryOptions({ id: initialVale?.id })

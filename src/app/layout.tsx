@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/provider/ThemeProvider";
 import { TRPCReactProvider } from "@/trpc/client";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -22,22 +23,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TRPCReactProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${poppins.variable} antialiased`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-          <div className="absolute -z-1 left-20 right-0 top-[51%] h-[300px] w-[300px] opacity-25 rounded-full bg-[radial-gradient(circle_400px_at_10%_300px,#fbfbfb36,#000)] animate-spin [animation-duration:7s] "></div>
-          <div className="absolute bottom-0 -z-1 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:90px_100px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-          <Toaster />
-        </body>
-      </html>
-    </TRPCReactProvider>
+    <NuqsAdapter>
+      <TRPCReactProvider>
+        <html lang="en" suppressHydrationWarning>
+          <body className={`${poppins.variable} antialiased`}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+            <div className="absolute -z-1 left-20 right-0 top-[51%] h-[300px] w-[300px] opacity-25 rounded-full bg-[radial-gradient(circle_400px_at_10%_300px,#fbfbfb36,#000)] animate-spin [animation-duration:7s] "></div>
+            <div className="absolute bottom-0 -z-1 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:90px_100px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+            <Toaster />
+          </body>
+        </html>
+      </TRPCReactProvider>
+    </NuqsAdapter>
   );
 }

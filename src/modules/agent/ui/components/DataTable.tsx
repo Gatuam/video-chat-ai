@@ -74,9 +74,11 @@ export function DataTable<TData, TValue>({
             <TableRow>
               <TableCell
                 colSpan={columns.length}
-                className="h-20 text-muted-foreground text-center"
+                className=" relative h-130 text-muted-foreground text-center hover:pointer-events-none overflow-hidden hover-none"
               >
-                No Agents.
+                <h1 className=" text-lg font-semibold">No Agents..</h1>
+                <p>create new agent to get start</p>
+                <div className=" absolute top-60 -left-50 opacity-10 animate-spin  h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
               </TableCell>
             </TableRow>
           )}
