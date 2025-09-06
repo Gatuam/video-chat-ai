@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { toast } from "sonner";
+import { GenAvatarImage } from "@/components/global/GenAvatar";
 
 interface Props {
   onSuccess?: () => void;
@@ -71,16 +71,7 @@ export const AgentFrom = ({ onSuccess, onCancle, initialVale }: Props) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className=" space-y-4">
-            <Avatar>
-              <AvatarImage
-                className=" cursor-pointer mb-1 size-13 animate-pulse bg-accent-foreground/10 border border-accent-foreground/20 p-1.5 rounded-full"
-                src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${encodeURIComponent(
-                  name
-                )}`}
-                alt={name}
-              />
-              <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
-            </Avatar>
+            <GenAvatarImage name={name} />
             <FormField
               control={form.control}
               name="name"

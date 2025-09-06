@@ -1,7 +1,6 @@
 import { db } from "@/db";
 import { agents } from "@/db/schema";
 import {
-  baseProcedure,
   createTRPCRouter,
   productedprocedure,
 } from "@/trpc/init";
@@ -11,7 +10,7 @@ import z from "zod";
 import { eq } from "drizzle-orm";
 
 export const agentsRouter = createTRPCRouter({
-  getOne: baseProcedure
+  getOne: productedprocedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       const [ExistingAgent] = await db
@@ -20,7 +19,7 @@ export const agentsRouter = createTRPCRouter({
         .where(eq(agents.id, input?.id));
       return ExistingAgent;
     }),
-  getmany: baseProcedure.query(async () => {
+  getmany: productedprocedure.query(async () => {
     const data = await db.select().from(agents);
     return data;
     //throw new TRPCError({code : "BAD_GATEWAY"})
