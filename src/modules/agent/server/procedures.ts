@@ -15,11 +15,19 @@ import {
 export const agentsRouter = createTRPCRouter({
   getOne: productedprocedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
+    .query(async ({ ctx, input }) => {
       const [ExistingAgent] = await db
         .select()
         .from(agents)
-        .where(eq(agents.id, input?.id));
+        .where(
+          and(
+            eq(agents.id, input?.id), 
+            eq(agents.userId, ctx.auth.user.id)
+          )
+        );
+        if(!ExistingAgent){
+          throw new TRPCError({code : 'NOT_FOUND', message : "Agent not found"})
+        }
       return ExistingAgent;
     }),
   getmany: productedprocedure
@@ -59,10 +67,10 @@ export const agentsRouter = createTRPCRouter({
             search ? ilike(agents.name, `%${search}`) : undefined
           )
         );
-        const totalPages = Math.ceil(total.count / pageSize)
+      const totalPages = Math.ceil(total.count / pageSize);
       return {
-        items : data,
-        total : total.count,
+        items: data,
+        total: total.count,
         totalPages,
       };
       //throw new TRPCError({code : "BAD_GATEWAY"})

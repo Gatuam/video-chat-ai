@@ -1,4 +1,4 @@
-import { BotIcon, DiamondIcon, VideoIcon } from "lucide-react";
+import { BotIcon,   StarsIcon,  VideoIcon } from "lucide-react";
 
 export const firstSections = [
     {
@@ -14,7 +14,7 @@ export const firstSections = [
 ]
 export const secondSections = [
     {
-        icon : DiamondIcon,
+        icon : StarsIcon,
         label : 'Upgarde',
         herf : '/upgrade',
     },
