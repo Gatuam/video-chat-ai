@@ -7,10 +7,14 @@ import { AgentGetOne } from "../../types";
 interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  initialValues? : AgentGetOne;
+  initialValues?: AgentGetOne;
 }
 
-export const UpdateAgentDailog = ({ open, onOpenChange, initialValues }: Props) => {
+export const UpdateAgentDailog = ({
+  open,
+  onOpenChange,
+  initialValues,
+}: Props) => {
   return (
     <ResponsiveDailog
       title=" Edit Agent"

@@ -177,11 +177,13 @@ const SigninView = () => {
             </Form>
           </div>
 
-          <div className=" bg-radial  from-accent to-accent/80 relative hidden md:flex flex-col gap-y-3 items-center justify-center">
+          <div className=" bg-radial  from-accent to-accent/80 relative hidden md:flex flex-col gap-y-3 items-center justify-center ">
+            <div className="absolute z-1  -right-25 top-[78%] h-[300px] w-[300px] opacity-25 rounded-full bg-[radial-gradient(circle_400px_at_10%_300px,#fbfbfb36,#000)] animate-spin [animation-duration:7s] "></div>
+            <div className="absolute z-1  -top-59 -left-0  h-[300px] w-[300px] opacity-25 rounded-full bg-[radial-gradient(circle_400px_at_10%_300px,#fbfbfb36,#000)] animate-spin [animation-duration:7s] "></div>
             <img
               src={"/logo.png"}
               alt="logo"
-              className=" size-50 object-cover opacity-60"
+              className=" size-50 object-cover opacity-60 animate-pulse"
             />
             <p className=" text-2xl font-semibold text-white">Video-AI</p>
           </div>

@@ -1,8 +1,8 @@
 import { db } from "@/db";
-import {  meetings } from "@/db/schema";
+import { meetings } from "@/db/schema";
 import { createTRPCRouter, productedprocedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
-import z from "zod";
+import z, { string } from "zod";
 import { and, count, desc, eq, ilike } from "drizzle-orm";
 import {
   DEFAULT_PAGE,
@@ -10,8 +10,62 @@ import {
   MAX_PAGE_SIZE,
   MIN_PAGE_SIZE,
 } from "@/const/constant";
+import { meetingSchema, meetingUpadteSchema } from "../schema";
 
 export const meetingsRouter = createTRPCRouter({
+  update: productedprocedure
+    .input(meetingUpadteSchema)
+    .mutation(async ({ ctx, input }) => {
+      const [updateMeeting] = await db
+        .update(meetings)
+        .set(input)
+        .where(
+          and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth.user.id))
+        )
+        .returning();
+      if (!updateMeeting) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Agent not found!",
+        });
+      }
+      return updateMeeting;
+    }),
+  remove: productedprocedure
+    .input(
+      z.object({
+        id: string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [removeMeeting] = await db
+        .delete(meetings)
+        .where(
+          and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth.user.id))
+        )
+        .returning();
+      if (!removeMeeting) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Agent not found!",
+        });
+      }
+      return removeMeeting;
+    }),
+  create: productedprocedure
+    .input(meetingSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { auth } = ctx;
+      const [createMeeting] = await db
+        .insert(meetings)
+        .values({
+          name: input.name,
+          agentsId: input.agentId,
+          userId: auth?.user?.id,
+        })
+        .returning();
+      return createMeeting;
+    }),
   getOne: productedprocedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -19,14 +73,11 @@ export const meetingsRouter = createTRPCRouter({
         .select()
         .from(meetings)
         .where(
-          and(
-            eq(meetings.id, input?.id), 
-            eq(meetings.userId, ctx.auth.user.id)
-          )
+          and(eq(meetings.id, input?.id), eq(meetings.userId, ctx.auth.user.id))
         );
-        if(!ExistingMeeting){
-          throw new TRPCError({code : 'NOT_FOUND', message : "Agent not found"})
-        }
+      if (!ExistingMeeting) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Agent not found" });
+      }
       return ExistingMeeting;
     }),
   getmany: productedprocedure
