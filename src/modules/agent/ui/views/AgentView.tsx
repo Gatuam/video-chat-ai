@@ -4,9 +4,9 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 import { columns } from "../components/Colums";
 import { useFilterHook } from "../../hooks/useFilterHook";
-import { DataPagination } from "../components/DataPagination";
 import { useRouter } from "next/navigation";
 import { DataTable } from "@/components/global/DataTable";
+import { DataPagination } from "@/components/global/DataPagination";
 
 export const AgentView = () => {
   const router = useRouter();
