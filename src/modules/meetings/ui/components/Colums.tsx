@@ -35,12 +35,18 @@ const statusIconMap = {
   cancled: CircleXIcon,
 };
 const statusColorMap = {
-  upcoming: "bg-yellow-500/20 text-yellow-300 border-yellow-800/5",
-  active: "bg-blue-500/20 text-blue-800 border-blue-800/5",
-  completed: "bg-emerald-500/20 text-emerald-800 border-emerald-800/5",
-  cancelled: "bg-rose-500/20 text-rose-800 border-rose-800/5",
-  processing: "bg-gray-300/20 text-gray-800 border-gray-800/5",
-};
+  upcoming:
+    "bg-yellow-500/20 text-yellow-800 border-yellow-800/5 dark:bg-yellow-400/20 dark:text-yellow-300 dark:border-yellow-300/5",
+  active:
+    "bg-blue-500/20 text-blue-800 border-blue-800/5 dark:bg-blue-400/20 dark:text-blue-300 dark:border-blue-300/5",
+  completed:
+    "bg-emerald-500/20 text-emerald-800 border-emerald-800/5 dark:bg-emerald-400/20 dark:text-emerald-300 dark:border-emerald-300/5",
+  cancelled:
+    "bg-rose-500/20 text-rose-800 border-rose-800/5 dark:bg-rose-400/20 dark:text-rose-300 dark:border-rose-300/5",
+  processing:
+    "bg-gray-300/20 text-gray-800 border-gray-800/5 dark:bg-gray-600/20 dark:text-gray-300 dark:border-gray-300/5",
+} as const;
+
 
 export const columns: ColumnDef<MeetingGetMany[number]>[] = [
   {

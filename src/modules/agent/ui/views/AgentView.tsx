@@ -2,11 +2,11 @@
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
-import { DataTable } from "../components/DataTable";
 import { columns } from "../components/Colums";
 import { useFilterHook } from "../../hooks/useFilterHook";
 import { DataPagination } from "../components/DataPagination";
 import { useRouter } from "next/navigation";
+import { DataTable } from "@/components/global/DataTable";
 
 export const AgentView = () => {
   const router = useRouter();

@@ -4,20 +4,23 @@ import { Button } from "@/components/ui/button";
 import { PlusIcon, XCircleIcon } from "lucide-react";
 import React, { useState } from "react";
 import { DEFAULT_PAGE } from "@/const/constant";
-import { useFilterHook } from "@/modules/agent/hooks/useFilterHook";
-
-import { AgentSearch } from "@/modules/agent/ui/components/AgentSearch";
 import { NewMeetingDailog } from "./NewMeetingDailog";
+import { MeetingSearch } from "./MeetingSearch";
+import { StatusFilter } from "./StatusFilter";
+import { useFilterHook } from "../../hooks/useFilterHook";
+// import { AgentIdFilter } from "./AgentIdFilter";
 
 export const ListMeetings = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useFilterHook();
-  const isAnyFilterModified = !!filter.search;
+
+  const isAnyFilterModified = !!filter.status || !!filter.search;
 
   const onClearFilter = () => {
     setFilter({
       search: "",
       page: DEFAULT_PAGE,
+      status: null,
     });
   };
   return (
@@ -32,7 +35,9 @@ export const ListMeetings = () => {
           </Button>
         </div>
         <div className=" flex items-center gap-x-3 p-1">
-          <AgentSearch />
+          <MeetingSearch />
+          <StatusFilter />
+          {/* <AgentIdFilter /> */}
           {isAnyFilterModified && (
             <Button variant={"secondary"} size={"sm"} onClick={onClearFilter}>
               <XCircleIcon />

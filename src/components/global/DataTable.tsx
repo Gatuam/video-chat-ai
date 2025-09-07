@@ -20,12 +20,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onRowClick?: (row: TData) => void;
+  isMeeting?: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   onRowClick,
+  isMeeting,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -76,8 +78,9 @@ export function DataTable<TData, TValue>({
                 colSpan={columns.length}
                 className=" relative h-130 text-muted-foreground text-center hover:pointer-events-none overflow-hidden hover-none"
               >
-                <h1 className=" text-lg font-semibold">No Agents..</h1>
-                <p>create new agent to get start</p>
+                <h1 className=" text-lg font-semibold">
+                 { isMeeting ? 'No meetings...' : ' No Agents..'}</h1>
+                <p>{ isMeeting ? 'create new meeting to get start' : 'create new agent to get start'}</p>
                 <div className=" absolute top-60 -left-50 opacity-10 animate-spin  h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
               </TableCell>
             </TableRow>
