@@ -3,8 +3,8 @@ import { BotIcon,   StarsIcon,  VideoIcon } from "lucide-react";
 export const firstSections = [
     {
         icon : VideoIcon,
-        label : 'Mettings',
-        herf : '/mettings',
+        label : 'Meetings',
+        herf : '/meetings',
     },
     {
         icon : BotIcon,
