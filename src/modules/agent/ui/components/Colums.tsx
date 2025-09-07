@@ -46,7 +46,7 @@ export const columns: ColumnDef<AgentGetOne>[] = [
           >
             <VideoIcon />
             <p className=" text-sm font-thin truncate line-clamp-1">
-              1mettings
+              meetings
             </p>
           </Badge>
         </div>
