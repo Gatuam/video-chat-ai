@@ -2,33 +2,35 @@
 import { useTRPC } from "@/trpc/client";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { AgentIdViewHeader } from "../components/AgentIdViewHeader";
 import { GenAvatarImage } from "@/components/global/GenAvatar";
 import { Badge } from "@/components/ui/badge";
 import {  VideoIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { UpdateAgentDailog } from "../components/UpdateAgentDailog";
+import { UpdateAgentDailog } from "@/modules/agent/ui/components/UpdateAgentDailog";
+import { MeetingIdViewHeader } from "../components/MeetingIdViewHeader";
+import { UpdateMeetingDailog } from "../components/UpdateMeetingDailog";
+
 
 interface Props {
-  agentId: string;
+  meetingId: string;
 }
 
-export const AgentIdView = ({ agentId }: Props) => {
+export const MeetingIdView = ({ meetingId }: Props) => {
   const [updateDailogOpen, setUpdateAgentDailogOpen] = useState(false)
   const router = useRouter()
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const { data } = useSuspenseQuery(
-    trpc.agent.getOne.queryOptions({
-      id: agentId,
+    trpc.meetings.getOne.queryOptions({
+      id: meetingId,
     })
   );
-  const removeAgent = useMutation(
-    trpc.agent.remove.mutationOptions({
+  const removeMeeting = useMutation(
+    trpc.meetings.remove.mutationOptions({
       onSuccess:async()=> {
-       await queryClient.invalidateQueries(trpc.agent.getmany.queryOptions({}));
-        router.push('/agents')
+       await queryClient.invalidateQueries(trpc.meetings.getmany.queryOptions({}));
+        router.push('/meetings')
       },
       onError:  (error)=> {
         toast.error(error.message)
@@ -48,22 +50,22 @@ export const AgentIdView = ({ agentId }: Props) => {
   return (
     <>
    {/** <RemoveConfirmation/>  */}
-   <UpdateAgentDailog
+   <UpdateMeetingDailog
    onOpenChange={setUpdateAgentDailogOpen}
    open={updateDailogOpen}
    initialValues={data}
    />
      <div className=" flex-1 py-4 px-4 md:px-8 flex-col gap-y-4 space-y-3">
-      <AgentIdViewHeader
-        agentName={data.name}
-        agentId={data.id}
+      <MeetingIdViewHeader
+        meetingName={data.name}
+        meetingId={data.id}
         onEdit={() => setUpdateAgentDailogOpen(true)}
-        onRemove={() => removeAgent.mutate({id : agentId})}
+        onRemove={() => removeMeeting.mutate({id : meetingId})}
       />
       <div className=" bg-accent rounded-lg border">
         <div className=" px-4 py-5 gap-y-6 flex flex-col col-span-5">
           <div className=" flex items-center gap-x-3">
-            <GenAvatarImage name={data.name} />
+            {/* <GenAvatarImage name={data.name} /> */}
             <h2 className=" text-2xl font-medium">{data.name}</h2>
           </div>
           <Badge
@@ -76,7 +78,7 @@ export const AgentIdView = ({ agentId }: Props) => {
           <div className=" flex flex-col gap-y-3">
             <p className="text-lg font-medium underline">Instructions</p>
             <p className=" text-sm text-accent-foreground/50">
-              {data.instructions}
+              {data.duration}
             </p>
           </div>
         </div>

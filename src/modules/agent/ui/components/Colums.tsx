@@ -27,7 +27,7 @@ export const columns: ColumnDef<AgentGetMany[number]>[] = [
     cell: ({ row }) => (
       <div className=" flex flex-col gap-y-2">
         <div className=" flex items-center gap-x-2">
-          <p className=" text-sm font-thin text-muted-foreground/40 truncate">
+          <p className=" text-sm font-thin text-muted-foreground/40 truncate w-29 md:w-50 line-clamp-2">
             {row.original.instructions}
           </p>
         </div>

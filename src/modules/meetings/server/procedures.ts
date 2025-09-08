@@ -72,8 +72,15 @@ export const meetingsRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const [ExistingMeeting] = await db
-        .select()
+        .select({
+          ...getTableColumns(meetings),
+          agent : agents,
+          duration: sql<number>`EXTRACT(EPOCH FROM (end_at - start_at))`.as(
+            "duration"
+          ),
+        })
         .from(meetings)
+        .innerJoin(agents, eq(meetings.agentsId, agents.id))
         .where(
           and(eq(meetings.id, input?.id), eq(meetings.userId, ctx.auth.user.id))
         );

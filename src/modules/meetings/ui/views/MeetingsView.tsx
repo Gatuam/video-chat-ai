@@ -17,7 +17,10 @@ export const MeetingsView = () => {
   );
   return (
     <div className="flex-1 flex flex-col gap-y-3 md:px-6 px-4 py-3 w-full">
-      <DataTable columns={columns} data={data.items} isMeeting={true}
+      <DataTable 
+      columns={columns} 
+      data={data.items} 
+      isMeeting={true}
       onRowClick={(row)=> router.push(`/meetings/${row.id}`)}
       />
       <DataPagination
