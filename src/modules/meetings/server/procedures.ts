@@ -11,10 +11,31 @@ import {
   MIN_PAGE_SIZE,
 } from "@/const/constant";
 import { meetingSchema, meetingUpadteSchema } from "../schema";
-import { agentSchema } from "@/modules/agent/schema";
 import { MeetingStatus } from "../types";
+import { streamVideo } from "@/lib/stream-video";
+import { generateAvatarUrl } from "@/lib/avatar";
 
 export const meetingsRouter = createTRPCRouter({
+  generateToken: productedprocedure.mutation(async ({ ctx }) => {
+    const avatarUrl =
+      ctx.auth.user.image ?? generateAvatarUrl(ctx.auth.user.name || "User");
+    await streamVideo.upsertUsers([
+      {
+        id: ctx.auth.user.id,
+        name: ctx.auth.user.name,
+        role: "admin",
+        image: ctx.auth.user.image ?? avatarUrl,
+      },
+    ]);
+    const expirationTime = Math.floor(Date.now() / 1000) + 3600;
+    const issueAt = Math.floor(Date.now() / 1000) - 60;
+    const token = streamVideo.generateUserToken({
+      user_id: ctx.auth.user.id,
+      exp: expirationTime,
+      validity_in_seconds: issueAt,
+    });
+    return token;
+  }),
   update: productedprocedure
     .input(meetingUpadteSchema)
     .mutation(async ({ ctx, input }) => {
@@ -66,6 +87,48 @@ export const meetingsRouter = createTRPCRouter({
           userId: auth?.user?.id,
         })
         .returning();
+      const call = streamVideo.video.call("default", createMeeting.id);
+      await call.create({
+        data: {
+          created_by_id: ctx.auth.user.id,
+          custom: {
+            meetingId: createMeeting.id,
+            meetingName: createMeeting.name,
+          },
+          settings_override: {
+            transcription: {
+              language: "en",
+              mode: "auto-on",
+              closed_caption_mode: "auto-on",
+            },
+            recording: {
+              mode: "auto-on",
+              quality: "720p",
+            },
+          },
+        },
+      });
+      const [existingAgent] = await db
+        .select()
+        .from(agents)
+        .where(eq(agents.id, createMeeting.agentsId));
+      if (!existingAgent) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Agent not found!",
+        });
+      }
+      const avatarUrl =
+        ctx.auth.user.image ?? generateAvatarUrl(existingAgent.name || "User");
+      await streamVideo.upsertUsers([
+        {
+          id: existingAgent.id,
+          name: existingAgent.name,
+          role: "user",
+          image: avatarUrl,
+        },
+      ]);
+
       return createMeeting;
     }),
   getOne: productedprocedure
@@ -74,7 +137,7 @@ export const meetingsRouter = createTRPCRouter({
       const [ExistingMeeting] = await db
         .select({
           ...getTableColumns(meetings),
-          agent : agents,
+          agent: agents,
           duration: sql<number>`EXTRACT(EPOCH FROM (end_at - start_at))`.as(
             "duration"
           ),

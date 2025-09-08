@@ -12,3 +12,4 @@ export const GenAvatarImage = ({ name }: { name: string }) => {
     </Avatar>
   );
 };
+
