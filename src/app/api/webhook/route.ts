@@ -102,16 +102,67 @@ export async function POST(req: NextRequest) {
     realtimeClient.updateSession({
       instructions: ExistingAgent.instructions,
     });
-  }else if(eventType === 'call.session_participant_left'){
+  } else if (eventType === "call.session_participant_left") {
     const event = payload as CallSessionParticipantLeftEvent;
-    const meetingId = event.call_cid.split(':')[1]
-    if(!meetingId){
-      return NextResponse.json({
-        error : "Missing meeting id "
-      }, {status : 401})
+    const meetingId = event.call_cid.split(":")[1];
+    if (!meetingId) {
+      return NextResponse.json(
+        {
+          error: "Missing meeting id ",
+        },
+        { status: 401 }
+      );
     }
     const call = streamVideo.video.call("default", meetingId);
     await call.end();
+  } else if (eventType === "call.session_end") {
+    const event = payload as CallEndedEvent;
+    const meetingId = event.call.custom?.meetingId;
+    if (!meetingId) {
+      return NextResponse.json(
+        {
+          error: "Missing meeting id ",
+        },
+        { status: 401 }
+      );
+    }
+    await db
+      .update(meetings)
+      .set({
+        status: "processing",
+        endedAt: new Date(),
+      })
+      .where(and(eq(meetings.id, meetingId), eq(meetings.status, "active")));
+  } else if (eventType === "call.transcription_ready") {
+    const event = payload as CallTranscriptionReadyEvent;
+    const meetingId = event.call_cid.split(":")[1];
+    const [UpadtedMetting] = await db
+      .update(meetings)
+      .set({
+        transcriptUrl: event.call_transcription.url,
+      })
+      .where(eq(meetings.id, meetingId))
+      .returning();
+
+    if (!UpadtedMetting) {
+      return NextResponse.json(
+        {
+          error: "Meeting not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    //innges background job
+  } else if (eventType === "call.recording_ready") {
+    const event = payload as CallRecordingReadyEvent;
+    const meetingId = event.call_cid.split(":")[1];
+    await db
+      .update(meetings)
+      .set({
+        recodingUrl: event.call_recording.url,
+      })
+      .where(eq(meetings.id, meetingId));
   }
 
   return NextResponse.json({ status: "ok" });

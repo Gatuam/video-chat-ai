@@ -47,7 +47,6 @@ const statusColorMap = {
     "bg-gray-300/20 text-gray-800 border-gray-800/5 dark:bg-gray-600/20 dark:text-gray-300 dark:border-gray-300/5",
 } as const;
 
-
 export const columns: ColumnDef<MeetingGetMany[number]>[] = [
   {
     accessorKey: "name",
