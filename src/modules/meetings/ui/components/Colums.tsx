@@ -59,7 +59,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
             {row.original.agent.name}
           </span>
           <GenAvatarImage name={row.original.agent.name} />
-          <span className=" text-sm  text-muted">
+          <span className=" text-sm  text-muted-foreground/50">
             {row.original.startedAt
               ? format(row.original.startedAt, "MMM d")
               : ""}
