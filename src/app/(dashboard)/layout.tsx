@@ -8,7 +8,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <SidebarProvider>
         <DashboardSidebar />
-        <main className=" flex flex-col h-screen w-screen">
+        <main className=" flex flex-col h-screen w-full overflow-hidden">
           <DashboardNav />
           {children}
         </main>
