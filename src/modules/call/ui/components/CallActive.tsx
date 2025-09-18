@@ -11,13 +11,13 @@ interface Props {
 export const CallActive = ({onLeave, meetingName}: Props) => {
     
   return (
-    <div className=' flex flex-col justify-between p-4 text-accent-foreground w-full '>
+    <div className=' flex flex-col justify-between p-4 text-accent-foreground w-full'>
     <div className=' bg-accent rounded-full flex items-center gap-4 w-full'>
         <Link href={'/'} className=' flex items-center justify-center p-1 bg-accent-foreground/10 w-fit'>
         <Image
         className=' rounded-full'
         src={'/logo.png'}
-        width={25}
+        width={45}
         height={25}
         alt='logo'
         />
@@ -28,7 +28,7 @@ export const CallActive = ({onLeave, meetingName}: Props) => {
     </div>
     <SpeakerLayout/>
     <div className=' bg-accent rounded-full px-4'>
-        <CallControls  onLeave={onLeave}/>
+        <CallControls   onLeave={onLeave}/>
     </div>
     </div>
   )

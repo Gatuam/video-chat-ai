@@ -47,13 +47,14 @@ export const CallLobby = ({ onJoin }: Props) => {
   const hasMediaPermission = hasCameraPermission && hasMicPermission;
   return (
     <div className=" flex flex-col items-center h-full ">
-      <div className=" py-6 px-8 flex flex-1 items-center justify-center bg-accent-foreground/5 backdrop-blur-2xl rounded-md border border-accent-foreground/10 ">
-        <div className=" flex flex-col items-center justify-center gap-y-6 shadow-2xl ">
+      <div className=" w-xs md:max-w-xl md:w-xl  py-6 px-8 flex flex-1 items-center justify-center bg-accent-foreground/5 backdrop-blur-2xl rounded-md border border-accent-foreground/10 ">
+        <div className=" w-xs md:max-w-xl md:w-xl flex flex-col items-center justify-center gap-y-6 shadow-2xl ">
           <div className=" flex flex-col gap-y-2 text-center">
             <h6 className=" text-lg font-medium">Ready to join?</h6>
             <p className=" text-sm ">Set up your call before joining</p>
           </div>
           <VideoPreview
+          className=" !w-2xs md:!w-lg"
             DisabledVideoPreview={
               hasMediaPermission ? DisableVideoPreview : AllowBrowserPermission
             }

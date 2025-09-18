@@ -3,7 +3,7 @@ import { StreamTheme, useCall } from "@stream-io/video-react-sdk";
 import React, { useState } from "react";
 import { CallLobby } from "./CallLobby";
 import { CallActive } from "./CallActive";
-import { CallEnd } from "./Callnd";
+import { CallEnd } from "./CallEnd";
 
 interface Props {
   meetingName: string;

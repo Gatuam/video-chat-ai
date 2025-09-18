@@ -59,7 +59,7 @@ const SignupView = () => {
           name: data.name,
           email: data.email,
           password: data.password,
-          callbackURL: "/",
+          callbackURL: "/agents",
         },
         {
           onSuccess: () => {

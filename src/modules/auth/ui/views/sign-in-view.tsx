@@ -45,7 +45,7 @@ const SigninView = () => {
     try {
       setLoading(true);
       const res = await authClient.signIn.email(
-        { email: data.email, password: data.password, callbackURL: "/" },
+        { email: data.email, password: data.password, callbackURL: "/agents" },
         {
           onSuccess: () => {
             toast.success("SignIn successfully");

@@ -9,9 +9,10 @@ import {
   CallRecordingReadyEvent,
   CallSessionStartedEvent,
 } from "@stream-io/node-sdk";
-import { error } from "console";
 import { and, eq, not } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
+
+export const runtime = "nodejs";
 
 function verifySignatureWithSDK(body: string, signature: string): boolean {
   return streamVideo.verifyWebhook(body, signature);
@@ -154,6 +155,7 @@ export async function POST(req: NextRequest) {
     }
 
     //innges background job
+
   } else if (eventType === "call.recording_ready") {
     const event = payload as CallRecordingReadyEvent;
     const meetingId = event.call_cid.split(":")[1];
