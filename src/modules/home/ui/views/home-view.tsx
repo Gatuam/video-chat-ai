@@ -12,37 +12,37 @@ const features = [
     title: "Free AI Calls",
     description:
       "Connect instantly with AI-powered customer service agents at no cost.",
-    icon: <Video className="w-6 h-6 text-accent" />,
+    icon: <Video className="w-6 h-6 text-accent-foreground" />,
   },
   {
     title: "Smart Customer Support",
     description:
       "Our AI agents can handle queries, resolve issues, and provide guidance efficiently.",
-    icon: <Bot className="w-6 h-6 text-accent" />,
+    icon: <Bot className="w-6 h-6 text-card-foreground" />,
   },
   {
     title: "Quick Deployment",
     description:
       "Set up your customer service AI in seconds and start assisting your clients immediately.",
-    icon: <Rocket className="w-6 h-6 text-accent" />,
+    icon: <Rocket className="w-6 h-6 text-card-foreground" />,
   },
   {
     title: "Secure & Private",
     description:
       "All customer interactions are encrypted and stored securely for your peace of mind.",
-    icon: <Shield className="w-6 h-6 text-accent" />,
+    icon: <Shield className="w-6 h-6 text-card-foreground" />,
   },
   {
     title: "Global Support",
     description:
       "Assist customers from anywhere in the world with multilingual AI capabilities.",
-    icon: <Globe className="w-6 h-6 text-accent" />,
+    icon: <Globe className="w-6 h-6 text-card-foreground" />,
   },
   {
     title: "Instant Messaging",
     description:
       "Provide fast chat support alongside AI calls to keep customers engaged.",
-    icon: <MessageSquare className="w-6 h-6 text-accent" />,
+    icon: <MessageSquare className="w-6 h-6 text-card-foreground" />,
   },
 ];
 
@@ -50,7 +50,7 @@ export function HomeView() {
   const isMobile = useIsMobile();
 
   return (
-    <main className=" text-accent-foreground flex flex-col items-center justify-center px-2">
+    <main className="text-accent-foreground flex flex-col items-center justify-center px-2">
       <header className="w-full flex justify-between items-center bg-accent/5 backdrop-blur-3xl px-8 py-3 border-b border-primary/10">
         <h1 className="text-xl md:text-2xl font-bold ">Customer-AI</h1>
         <nav>
@@ -80,12 +80,12 @@ export function HomeView() {
           </div>
         </section>
 
-        <section className="mt-10 md:mt-8 px-6 w-full max-w-6xl">
+        <section className="mt-10 md:mt-28 px-6 w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features
-              .slice(0, isMobile ? 2 : features.length)
+              .slice(0, isMobile ? 3 : features.length)
               .map((feature, index) => (
-                <Card key={index} className="hover:shadow-lg transition">
+                <Card key={index} className="hover:shadow-lg transition bg-chart-1/1 backdrop-blur-2xl">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       {feature.icon} {feature.title}
@@ -96,6 +96,25 @@ export function HomeView() {
               ))}
           </div>
         </section>
+
+        <footer className="w-full mt-12 border-t border-primary/20 py-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+          <p className="text-accent-foreground text-sm md:text-base">
+            © {new Date().getFullYear()} Customer-AI. All rights reserved.
+          </p>
+          <div className="flex gap-4 mt-4 md:mt-0">
+            <Link href="#" className="text-primary hover:underline text-xs md:text-md">
+              Privacy Policy
+            </Link>
+            <Link href="#" className="text-primary hover:underline text-xs md:text-md">
+              Terms of Service
+            </Link>
+            <Link href="#" className="text-primary hover:underline text-xs md:text-md">
+              Contact
+            </Link>
+          </div>
+        </div>
+      </footer>
       </div>
     </main>
   );
