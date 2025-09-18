@@ -52,7 +52,7 @@ export function HomeView() {
   return (
     <main className=" text-accent-foreground flex flex-col items-center justify-center px-2">
       <header className="w-full flex justify-between items-center bg-accent/5 backdrop-blur-3xl px-8 py-3 border-b border-primary/10">
-        <h1 className="text-xl md:text-2xl font-bold">Customer-AI</h1>
+        <h1 className="text-xl md:text-2xl font-bold ">Customer-AI</h1>
         <nav>
           <Link href="/agents">
             <Button variant="outline">My Agents</Button>
@@ -63,13 +63,15 @@ export function HomeView() {
       <div className="w-full h-full flex flex-col items-center justify-center mt-0 md:mt-1">
         {/* Hero Section */}
         <section className="flex flex-col items-center text-center mt-20 max-w-2xl">
-          <Badge className="mb-4">AI Customer Service</Badge>
+          <Badge className="mb-4 bg-blue-400 text-accent ">
+            AI Customer Service
+          </Badge>
           <h2 className="text-xl md:text-5xl font-extrabold tracking-tight text-accent-foreground">
             Free AI Calls & Customer Support
           </h2>
           <p className="mt-4 text-sm md:text-lg text-accent-foreground">
-            Let your AI agents handle customer queries, provide instant assistance,
-            and improve satisfaction—completely free.
+            Let your AI agents handle customer queries, provide instant
+            assistance, and improve satisfaction—completely free.
           </p>
           <div className="mt-6 flex gap-4">
             <Link href="/agents">
@@ -78,15 +80,12 @@ export function HomeView() {
           </div>
         </section>
 
-        <section className="mt-10 md:mt-15 px-6 w-full max-w-6xl">
+        <section className="mt-10 md:mt-8 px-6 w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features
               .slice(0, isMobile ? 2 : features.length)
               .map((feature, index) => (
-                <Card
-                  key={index}
-                  className="hover:shadow-lg transition"
-                >
+                <Card key={index} className="hover:shadow-lg transition">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       {feature.icon} {feature.title}
